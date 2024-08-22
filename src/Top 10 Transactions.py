@@ -25,5 +25,7 @@ ax.set_ylabel('Amount')
 ax.set_xticklabels(top_10_dates.index.strftime('%Y-%m-%d'), rotation=45, ha='right')
 plt.tight_layout()  # Adjust layout to make room for x-axis labels
 
-    # Display the bar chart in the Streamlit app
+# Display the bar chart in the Streamlit app
 st.pyplot(fig)
+
+# st.bar_chart(top_10_dates)

@@ -1,41 +1,31 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import plotly.express as px
 
 df = pd.read_csv("../Parsed Datasets/Metaverse.csv", usecols = ['location_region'])
 
 value_counts = df["location_region"].value_counts()
+value_counts_df = value_counts.reset_index()
+value_counts_df.columns = ['Continent', 'Number of Transactions']
 
-st.bar_chart(value_counts, horizontal=True, x_label="Number of Transactions", y_label="Continent")
-st.write(value_counts)
 
-fig, ax = plt.subplots()
-value_counts.plot(kind='pie', autopct='%1.1f%%', ax=ax, startangle=90, legend=False)
+st.header("What is the Metaverse?")
+st.markdown("The Metaverse is \" :blue-background[a set of digital spaces to socialize, learn, play and more] \"")
+st.write("The Metaverse primarily uses cryptocurrency for its transactions within each world and each world utilizes its own cryptocurrency")
 
-# Customize appearance
-ax.set_facecolor('#1e1e1e')  # Set background color of the pie chart
-fig.patch.set_facecolor('#1e1e1e')  # Set background color of the figure
-ax.texts[0].set_color('white')  # Set text color
-ax.texts[2].set_color('white')  # Set text color
-ax.texts[4].set_color('white')  # Set text color
-ax.texts[6].set_color('white')  # Set text color
-ax.texts[8].set_color('white')  # Set text color
-ax.set_title('Demographic of Metaverse Users', color='white', fontsize=14, fontweight='bold', fontname='Sans Serif')  # Title customization
 
-# Remove grid lines and spines
-ax.grid(False)
-for spine in ax.spines.values():
-    spine.set_visible(False)
+col1, col2 = st.columns(2)
 
-# Display the pie chart in Streamlit
-st.pyplot(fig)
-
-df = value_counts.to_frame()
-st.write(df)
-fig = px.pie(df, values='count', names='location_region')
-st.plotly_chart(fig)
+with col1:
+    st.write("")
+    st.write("")
+    st.dataframe(value_counts_df, hide_index=True)
+with col2:
+    fig = px.pie(value_counts_df, 
+                 values='Number of Transactions', 
+                 names='Continent', 
+                 title="Number of Transactions Per Continent")
+    st.plotly_chart(fig)
 
 # df["location_region"] = df["location_region"].replace({"Africa" : "8.7832,34.5085"})
 # df["location_region"] = df["location_region"].replace({"Asia" : "34.0479,100.6197"})

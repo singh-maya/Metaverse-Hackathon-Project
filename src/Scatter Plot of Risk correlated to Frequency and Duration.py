@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-data = pd.read_csv(filepath_or_buffer='Parsed Datasets/Metaverse.csv')
+data = pd.read_csv(filepath_or_buffer='../Parsed Datasets/Metaverse.csv')
 df = pd.DataFrame(data)
 
 color_map = {    'low_risk': 'green',    'moderate_risk': 'orange',    'high_risk': 'red'}#

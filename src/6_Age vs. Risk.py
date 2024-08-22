@@ -42,4 +42,4 @@ st.write(age_group_vs_risk)
 # # Show plot in Streamlit
 # st.pyplot(fig)
 
-st.bar_chart(age_group_vs_risk, x_label= "Age Group", y_label="Average Risk Score")
+st.bar_chart(age_group_vs_risk, y_label= "Age Group", x_label="Average Risk Score", horizontal=True)
