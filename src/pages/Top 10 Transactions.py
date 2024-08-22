@@ -2,6 +2,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 
+df = pd.read_csv("../Parsed Datasets/AllStocks.csv")
+
 # Set the title of the Streamlit app
 st.title("Top 10 Transaction Dates by Amount")
 
