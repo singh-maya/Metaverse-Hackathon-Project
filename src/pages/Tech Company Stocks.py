@@ -56,7 +56,7 @@ if filtered_df.empty:
 else:
     # Create an Altair chart with tooltips and mark_point() for better interactivity
     line_chart = alt.Chart(filtered_df).mark_line().encode(
-        x=alt.X('Date:T', title='Date', axis=alt.Axis(format='%B, %Y')),
+        x=alt.X('Date:T', title='', axis=alt.Axis(format='%B, %Y')),
         y=alt.Y('Close:Q', title='Close Price (USD)'),
         color='Company:N',
         tooltip=['Date:T', 'Company:N', 'Close:Q']
