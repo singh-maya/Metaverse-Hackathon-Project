@@ -68,7 +68,7 @@ else:
 
     # Add points on the line to improve tooltip visibility
     points = alt.Chart(filtered_df).mark_point(filled=True, size=60).encode(
-        x=alt.X(':T', title='Date', axis=alt.Axis(format='%B, %Y')),
+        x=alt.X('Date:T', title='', axis=alt.Axis(format='%B, %Y')),
         y=alt.Y('Close:Q', title='Close Price (USD)'),
         color='Company:N',
         tooltip=['Date:T', 'Company:N', 'Close:Q']
