@@ -167,7 +167,7 @@ color_map = {
 }
 
 # First multiselect filter for anomaly
-selected_anomalies = st.multiselect(
+selected_anomalies = st.sidebar.multiselect(
     'Select anomaly',
     options=['low_risk', 'moderate_risk', 'high_risk'],
     default=['low_risk', 'moderate_risk', 'high_risk'],
