@@ -25,13 +25,13 @@ map_df = pd.DataFrame({
 
 def get_color(risk_score):
     if risk_score < map_df['risk_score'].quantile(0.25):
-        return [0, 255, 0]  # Green for lower risk scores
+        return [238, 232, 246]  # Green for lower risk scores
     elif risk_score < map_df['risk_score'].quantile(0.5):
-        return [255, 255, 0]  # Yellow for medium-low risk scores
+        return [134, 151, 195]  # Yellow for medium-low risk scores
     elif risk_score < map_df['risk_score'].quantile(0.75):
-        return [255, 165, 0]  # Orange for medium-high risk scores
+        return [113, 145, 230]  # Orange for medium-high risk scores
     else:
-        return [255, 0, 0]  # Red for high risk scores
+        return [ 61, 82, 161]  # Red for high risk scores
 
 # Apply the color mapping to the DataFrame
 risk = agg_data['risk_score'].round(0).astype(int)
@@ -45,7 +45,7 @@ layer = pdk.Layer(
     get_radius='risk_score / 2.5',  # Adjust size scaling; smaller divisor = larger circles
     get_fill_color= 'color',
     pickable=True,
-    opacity=0.5,
+    opacity=0.9,
 )
 
 # Set the view state (center of the map)
@@ -62,10 +62,10 @@ st.pydeck_chart(r)
 
 st.markdown("""
 ### Legend
-- <span style="color:rgb(0, 255, 0)">&#11044;</span> Low Risk: Lower 25% of risk scores
-- <span style="color:rgb(255, 255, 0)">&#11044;</span> Medium-Low Risk: 25% to 50% of risk scores
-- <span style="color:rgb(255, 165, 0)">&#11044;</span> Medium-High Risk: 50% to 75% of risk scores
-- <span style="color:rgb(255, 0, 0)">&#11044;</span> High Risk: Top 25% of risk scores
+- <span style="color:rgb(238, 232, 246)">&#11044;</span> Low Risk: Lower 25% of risk scores
+- <span style="color:rgb(134, 151, 195)">&#11044;</span> Medium-Low Risk: 25% to 50% of risk scores
+- <span style="color:rgb(113, 145, 230)">&#11044;</span> Medium-High Risk: 50% to 75% of risk scores
+- <span style="color:rgb( 61, 82, 161)">&#11044;</span> High Risk: Top 25% of risk scores
 """, unsafe_allow_html=True)
 
 
