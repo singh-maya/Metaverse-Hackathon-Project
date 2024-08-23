@@ -30,8 +30,15 @@ st.write("5. Convert back to CSV to be used in visualizations")
 st.code('''df.to_csv('../Parsed Datasets/meta.csv')''',language="python")
 
 st.write("The primary dataset we used was the Metaverse Transactions Data thus, we joined the Stock Datasets with it by Date")
+st.write("1. Joined the Metaverse Transactions Dataset with the Stock Prices Datasets")
 st.code('''join_meta_metaverse = pd.merge(mv,meta, how ='inner', on='Date')''',language="python")
-st.write("")
+st.write("2. Check for Null Values after the join")
+st.code('''join_meta_metaverse.isnull().sum()''',language="python")
+st.write("3. Changed column names while merging")
+st.code('''
+        join_all_stocks = pd.merge(join_meta_metaverse_nvdia_google_msft,rblx, how ='inner', on='Date',suffixes=['_rblx'])
+        last_column = join_all_stocks.columns[-1]
+        join_all_stocks.rename(columns={last_column: last_column + '_rblx'}, inplace=True)''', language="python")
 
 st.divider()
 st.header("Streamlit")

@@ -109,6 +109,20 @@ def get_color(risk_score):
 risk = agg_data['risk_score'].round(0).astype(int)
 map_df['color'] = map_df['risk_score'].apply(get_color)
 
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("""
+### Legend
+- <span style="color:rgb(0, 255, 0)">&#11044;</span> Low Risk: Lower 25% of risk scores
+- <span style="color:rgb(255, 255, 0)">&#11044;</span> Medium-Low Risk: 25% to 50% of risk scores
+- <span style="color:rgb(255, 165, 0)">&#11044;</span> Medium-High Risk: 50% to 75% of risk scores
+- <span style="color:rgb(255, 0, 0)">&#11044;</span> High Risk: Top 25% of risk scores
+""", unsafe_allow_html=True)
+with col2:
+    # Display the sum of risk scores by continent in Streamlit
+    st.write(f"Sum of Risk Scores by Continent:")
+    st.dataframe(map_df[['continent', 'risk_score']], hide_index=True)
+
 # Define the layer for pydeck
 layer = pdk.Layer(
     'ScatterplotLayer',
@@ -131,19 +145,6 @@ view_state = pdk.ViewState(
 # Create the pydeck map and display it in Streamlit
 r = pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip={"text": "{continent}\nRisk Score: {risk_score}"})
 st.pydeck_chart(r)
-
-st.markdown("""
-### Legend
-- <span style="color:rgb(0, 255, 0)">&#11044;</span> Low Risk: Lower 25% of risk scores
-- <span style="color:rgb(255, 255, 0)">&#11044;</span> Medium-Low Risk: 25% to 50% of risk scores
-- <span style="color:rgb(255, 165, 0)">&#11044;</span> Medium-High Risk: 50% to 75% of risk scores
-- <span style="color:rgb(255, 0, 0)">&#11044;</span> High Risk: Top 25% of risk scores
-""", unsafe_allow_html=True)
-
-
-# Display the sum of risk scores by continent in Streamlit
-st.write(f"Sum of Risk Scores by Continent:")
-st.write(map_df[['continent', 'risk_score']])
 
 # Load data
 data = pd.read_csv(filepath_or_buffer='../Parsed Datasets/Metaverse.csv')
