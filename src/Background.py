@@ -11,7 +11,7 @@ value_counts_df.columns = ['Continent', 'Number of Transactions']
 
 st.header("What is the Metaverse?")
 st.markdown("The Metaverse is \" :blue-background[a set of digital spaces to socialize, learn, play and more] \"")
-st.write("The Metaverse primarily uses cryptocurrency for its transactions within each world and each world utilizes its own cryptocurrency")
+st.markdown("The Metaverse primarily uses **cryptocurrency** for its transactions within each world and each world utilizes its own cryptocurrency")
 
 
 col1, col2 = st.columns(2)
@@ -20,6 +20,9 @@ with col1:
     st.write("")
     st.write("")
     st.dataframe(value_counts_df, hide_index=True)
+    st.write("Total Number of Transactions: " + str(value_counts_df["Number of Transactions"].sum()))
+
+
 with col2:
     fig = px.pie(value_counts_df, 
                  values='Number of Transactions', 
