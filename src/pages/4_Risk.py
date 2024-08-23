@@ -121,7 +121,11 @@ with col1:
 with col2:
     # Display the sum of risk scores by continent in Streamlit
     st.write(f"Sum of Risk Scores by Continent:")
-    st.dataframe(map_df[['continent', 'risk_score']], hide_index=True)
+    st.dataframe(map_df[['continent', 'risk_score']], 
+                 column_config={
+                     "continent" : "Continent",
+                     "risk_score" : "Risk Score"
+                 },hide_index=True)
 
 # Define the layer for pydeck
 layer = pdk.Layer(
@@ -155,7 +159,12 @@ st.title("Analysis of Risk Scores")
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
-    st.write("Sample of related data", data[['amount','risk_score',"anomaly"]].iloc[200:205])
+    st.write("Sample of related data")
+    st.dataframe(data[['amount','risk_score',"anomaly"]].iloc[200:205], 
+                 column_config={
+                     "amount" : "Amount",
+                     "risk_score" : "Risk Score",
+                     "anomaly" : "Anomaly"})
     st.write("Avg risk_score:", data['risk_score'].mean())
     st.write("Min risk_score:", data['risk_score'].min())
 
